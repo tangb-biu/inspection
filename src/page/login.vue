@@ -103,6 +103,7 @@ export default {
 	&.left {
 		width: 60%;
 		background: url('../images/login-img.png') 70% center no-repeat;
+		transition: width linear 0.5s;
 	}
 
 	&.right {
@@ -125,6 +126,7 @@ export default {
 	top: 20%;
 	width: 25%;
 	padding: 10px;
+	transition: width linear 0.6s;
 	.form-group {
 		padding: 5px 45px;
 	}
