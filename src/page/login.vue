@@ -68,21 +68,20 @@ export default {
 <style lang="less" scoped>
 @baseColor: #418dd9;
 .login-container {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
 	.header {
 		height: 70px;
 	}
 	.content {
-		position: absolute;
 		top: 70px;
-		left: 0;
-		right: 0;
-		bottom: 30px;
+		height: ~"calc(100vh - 100px)";
 		padding: 20px;
 		background-color: @baseColor;
 	}
 
 	.footer {
-		position: fixed;
 		bottom: 0px;
 		height: 30px;
 		width: 100%;
@@ -123,10 +122,9 @@ export default {
 .login-form {
 	background-color: white;
 	position: absolute;
-	top: 25%;
-	width: 20%;
-	padding: 20px;
-    //box-shadow: 0 5px 15px rgba(0,0,0,.5);
+	top: 20%;
+	width: 25%;
+	padding: 10px;
 	.form-group {
 		padding: 5px 45px;
 	}
@@ -139,6 +137,23 @@ export default {
 
 	.btn-primary {
 		width: 100%;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.column{
+		&.left {
+			width: 0;
+			padding: 0px;
+		}
+		&.right {
+			width: 100%;
+		}
+	}
+
+	.login-form {
+		width: 70%;
+		left: 15%
 	}
 }
 </style>
