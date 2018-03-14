@@ -9,5 +9,51 @@ html,body{
 	padding: 0;
 }
 
+.i-container {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	min-height: 460px;
+	.header {
+		height: 70px;
+	}
+
+	.sidebar {
+		position: fixed;
+		width: 240px;
+		top: 0;
+		bottom: 0;
+		background: #222222;
+	}
+
+	.content {
+		height: 100%;
+		.substance {
+			height: ~"calc(100% - 100px)";
+			background-color: #F5F5F5;
+			padding: 20px;
+		}
+	}
+
+	.footer {
+		bottom: 0px;
+		height: 30px;
+		width: 100%;
+		line-height: 30px;
+		text-align: center;
+	}
+
+	.copyright {
+		font-size: 12px;
+	}
+}
+
+.box {
+	padding: 20px;
+	border: 1px solid #ddd;
+	background-color: #fff;
+	//box-shadow: 0 0.5px 0.5px rgba(0,0,0,.1);
+}
+
 
 

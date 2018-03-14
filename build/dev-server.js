@@ -1,5 +1,7 @@
 require('./check-versions')()
 
+var mock = require("./mock");
+
 var config = require('../config')
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
@@ -9,6 +11,8 @@ var opn = require('opn')
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
@@ -42,14 +46,10 @@ compiler.plugin('compilation', function (compilation) {
 })
 
 // proxy api requests
-Object.keys(proxyTable).forEach(function (context) {
-  var options = proxyTable[context]
-  if (typeof options === 'string') {
-    options = { target: options }
-  }
-  app.use(proxyMiddleware(options.filter || context, options))
-})
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+mock(app);
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
 
@@ -79,6 +79,14 @@ devMiddleware.waitUntilValid(() => {
     opn(uri)
   }
   _resolve()
+})
+
+Object.keys(proxyTable).forEach(function (context) {
+  var options = proxyTable[context]
+  if (typeof options === 'string') {
+    options = { target: options }
+  }
+  app.use(proxyMiddleware(context, options))
 })
 
 var server = app.listen(port)

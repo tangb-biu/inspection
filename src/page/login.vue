@@ -1,5 +1,5 @@
 <template>
-	<div class="login-container">
+	<div class="i-container">
 		<div class="header"></div>
 		<div class="content clearfix">
 			<div class="column left"></div>
@@ -17,47 +17,57 @@
 					<div class="form-group">
 						<div class="input-group input-group-md">
 							<span class="input-group-addon passwd"></span>
-							<input type="password" class="form-control" placeholder="密码" v-model="password"/>
+							<input type="password" class="form-control" placeholder="密码" v-model="password" @keyup="login" @input="handleInput" autocomplete="false"/>
 						</div>
 					</div>
-					<div class="form-group">
-						<p class="text-danger"></p>
-					</div>
+						<p class="text-danger" style="line-height: 20px; height: 20px;">{{msg}}</p>
 					<div class="form-group">
 						<a href="javascript:;" class="btn btn-primary" @click="login" @keyup="login">登录</a>
 					</div>
 				</form>
 			</div>
 		</div>
-		<div class="footer">
+		<!-- <div class="footer">
 			<span>杭州美创科技有限公司 &nbsp; &copy;2005-2018 &nbsp; 版权所有</span>
-		</div>
+		</div> -->
+		<Footer></Footer>
 	</div>
 </template>
 
 <script>
-import common from '@/utils/common'
+import { mapActions } from 'vuex';
+import Header from 'components/header';
+import Footer from 'components/footer';
 export default {
 	name: 'login',
+	components: {
+		Header,
+		Footer,
+	},
   	data: function() {
   		return {
 			username: 'ADMIN',
-  			password: ''
+			password: '',
+			msg: ''  
   		}
   	},
   	methods: {
-  		checkCode() {
-  			let code = common.trim(this.vcode);
-  			const vcode = this.$store.state.vcode;
-  			if(code === vcode) {
-  				this.$router.push({ path: '/home' });
-  			}
-		},
 		login(e) {
-			if(e.keyCode === 13) {
-				
+			let { username, password } = this;
+			if(e.type === 'click' || e.keyCode === 13) {
+				//login(handleSuccess.bind(this), handleFail.bind(this));
+				this.userLogin({username, password}).then(() => {
+					this.$router.push({ path: '/home' });
+				}).catch((data) => {
+					this.msg = data['msg'];
+				});
 			}
-		}  
+		},
+		handleInput() {
+			this.msg = "";
+		},
+		...mapActions(['userLogin'])
+
   	},
     created(){
 
@@ -67,33 +77,6 @@ export default {
 
 <style lang="less" scoped>
 @baseColor: #418dd9;
-.login-container {
-	position: absolute;
-	width: 100vw;
-	height: 100vh;
-	.header {
-		height: 70px;
-	}
-	.content {
-		top: 70px;
-		height: ~"calc(100vh - 100px)";
-		padding: 20px;
-		background-color: @baseColor;
-	}
-
-	.footer {
-		bottom: 0px;
-		height: 30px;
-		width: 100%;
-		line-height: 30px;
-		text-align: center;
-	}
-
-	.copyright {
-		font-size: 12px;
-	}
-}
-
 .column {
 	display: inline-block;
 	height: 100%;
@@ -123,7 +106,7 @@ export default {
 .login-form {
 	background-color: white;
 	position: absolute;
-	top: 20%;
+	top: 30%;
 	width: 25%;
 	padding: 10px;
 	transition: width linear 0.6s;
@@ -142,6 +125,12 @@ export default {
 	}
 }
 
+.content {
+	top: 70px;
+	height: ~"calc(100vh - 100px)";
+	background-color: @baseColor;
+}
+
 @media screen and (max-width: 800px) {
 	.column{
 		&.left {
@@ -154,6 +143,7 @@ export default {
 	}
 
 	.login-form {
+		top: 20%;
 		width: 70%;
 		left: 15%
 	}

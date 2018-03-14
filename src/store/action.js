@@ -1,6 +1,15 @@
-import {FILTER_VALUE} from './mutation-types'
+import { LOGIN } from './mutation-types'
+import { login } from '@/api/common';
 export default {
-	filterValue({commit}, option) {
-		commit(FILTER_VALUE, option)
+	userLogin({ commit }, config) {
+		return new Promise((resolve, reject) => {
+			login(config, (res) =>{
+				commit(LOGIN, {login: true});
+				resolve({msg: ""});
+			}, ({response}) => {
+				commit(LOGIN, {login: false, msg: response.data.msg});
+				reject({msg: response.data.msg});
+			})
+		});
 	}
 }
