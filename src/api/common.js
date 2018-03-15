@@ -10,6 +10,13 @@ let login = (config, fnSuccess, fnError) => {
     .catch(error => fnError(error))
 }
 
+let getTargets = (config, fnSuccess, fnError) => {
+  axios.get('/inspect/targets', config)
+    .then(res => fnSuccess(res.data))
+    .catch(error => fnError(error))
+}
+
 export {
-  login
+  login,
+  getTargets
 }

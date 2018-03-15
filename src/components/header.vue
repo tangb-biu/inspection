@@ -1,14 +1,14 @@
 <template>
   <div class="header">
-    <div>
+    <!-- <div>
       欢迎您, xxx<a class="btn btn-default btn-logout">退出</a>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 export default {
-    name: 'header',
+    name: 'headerItem',
     data: function() {
       return {
 

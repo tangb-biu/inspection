@@ -1,4 +1,11 @@
 export default {
     login: false,
-    loginMsg: ''
+    targets: [],
+    errMsg: "",
+    pager: {
+        pageSize: 10,
+        currentPage: 1,
+        totalPage: 10,
+        total: 0
+    }
 }

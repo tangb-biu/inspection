@@ -17,9 +17,24 @@ export default new Router({
       component: r => require.ensure([], r(require('@/page/login.vue')))
     },
     {
-      path: '/home',
-      name: 'home',
-      component: r => require.ensure([], r(require('@/page/home.vue')))
+      path: '/inspection',
+      name: 'inspection',
+      component: r => require.ensure([], r(require('@/page/inspection.vue')))
+    },
+    {
+      path: '/performance',
+      name: 'performance',
+      component: r => require.ensure([], r(require('@/page/performance.vue')))
+    },
+    {
+      path: '/config/targets',
+      name: 'configTargets',
+      component: r => require.ensure([], r(require('@/page/config/targets.vue')))
+    },
+    {
+      path: '/config/items',
+      name: 'configItems',
+      component: r => require.ensure([], r(require('@/page/config/items.vue')))
     }
   ]
 })

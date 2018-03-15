@@ -30,19 +30,19 @@
 		<!-- <div class="footer">
 			<span>杭州美创科技有限公司 &nbsp; &copy;2005-2018 &nbsp; 版权所有</span>
 		</div> -->
-		<Footer></Footer>
+		<FooterItem></FooterItem>
 	</div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-import Header from 'components/header';
-import Footer from 'components/footer';
+import HeaderItem from 'components/header';
+import FooterItem from 'components/footer';
 export default {
 	name: 'login',
 	components: {
-		Header,
-		Footer,
+		HeaderItem,
+		FooterItem,
 	},
   	data: function() {
   		return {
@@ -57,7 +57,7 @@ export default {
 			if(e.type === 'click' || e.keyCode === 13) {
 				//login(handleSuccess.bind(this), handleFail.bind(this));
 				this.userLogin({username, password}).then(() => {
-					this.$router.push({ path: '/home' });
+					this.$router.push({ path: '/inspection' });
 				}).catch((data) => {
 					this.msg = data['msg'];
 				});
@@ -70,7 +70,7 @@ export default {
 
   	},
     created(){
-
+		
     }
 }
 </script>

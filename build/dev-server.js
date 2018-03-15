@@ -11,8 +11,8 @@ var opn = require('opn')
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+//var cookieParser = require('cookie-parser');
+//var bodyParser = require('body-parser');
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
@@ -46,10 +46,10 @@ compiler.plugin('compilation', function (compilation) {
 })
 
 // proxy api requests
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-mock(app);
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(cookieParser());
+//mock(app);
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
 
