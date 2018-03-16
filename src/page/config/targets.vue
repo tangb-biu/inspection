@@ -79,7 +79,7 @@
 						<label class="col-md-3 control-label">业务名称：</label>
 						<div class="col-md-9">
 							<input type="text" class="form-control" placeholder="业务名称" v-model="targetObj.business.value" @input="() => {
-
+								
 							}">
 							<p class="text-danger err-place">{{targetObj.business.tips}}</p>
 						</div>
@@ -205,6 +205,7 @@ export default {
 	data: function () {
 		return {
 			show: false,
+			canSave: false,
 			targetObj: {
 				componentType: {
 					value: 1,
@@ -281,6 +282,45 @@ export default {
 			this.targetsLoad({params: page});
 		},
 		validateVal(type, val) {
+			if(type === 'ip') {
+				let flag = validator.isIP(val, 4);
+				if(!flag) {
+					this.targetObj[type]['tips'] = "IP地址格式不合法";
+					this.targetObj[type]['valid'] = false;
+					return;
+				}
+				this.targetObj[type]['tips'] = "";
+				this.targetObj[type]['valid'] = true;
+			} else if (type.indexOf("Port")) {
+				let flag = validator.isPort(val.trim());
+				if(!flag) {
+					this.targetObj[type]['tips'] = "端口格式不合法";
+					this.targetObj[type]['valid'] = false;
+					return;
+				}
+				this.targetObj[type]['tips'] = "";
+				this.targetObj[type]['valid'] = true;
+			} else {
+				let val = this.targetObj[type]['value'];
+				if(validator.isEmpty(val.trim())) {
+					this.targetObj[type]['tips'] = "此位置不能为空";
+					this.targetObj[type]['valid'] = false;
+				} else {
+					this.targetObj[type]['tips'] = "";
+					this.targetObj[type]['valid'] = true;
+				}
+			}
+
+
+
+			for(let item in this.targetObj) {
+				if(!this.targetObj[item]['valid']) {
+					this.canSave = false;
+					return;
+				}
+			}
+
+			this.canSave = true;
 
 		},
 		...mapActions(['targetsLoad'])
