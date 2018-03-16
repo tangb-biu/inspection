@@ -9,7 +9,7 @@
 					<h3>性能解析</h3>
 					<div style="width: 30%;">
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="请输入搜索关键字">
+							<input type="text" class="form-control" placeholder="请输入业务系统名称">
 							<span class="input-group-btn">
 								<button class="btn btn-info" type="button">
 									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -40,13 +40,10 @@
 									IP地址
 								</th>
 								<th>
-									上次巡检时间
+									性能分析时间
 								</th>
 								<th>
-									下次巡检时间
-								</th>
-								<th>
-									总巡检项
+									总的解析项
 								</th>
 								<th>
 									异常
@@ -57,7 +54,7 @@
 							</tr>
 						</table>
 						<div class="clearfix">
-							<a class="btn btn-info pull-right">去巡检</a>
+							<a class="btn btn-info pull-right">去解析</a>
 						</div>
 					</div>
 				</div>
