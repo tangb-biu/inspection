@@ -71,6 +71,7 @@
 import SideBar from 'components/sidebar';
 import FooterItem from 'components/footer';
 import HeaderItem from 'components/header';
+import { mapGetters } from 'vuex';
 export default {
 	name: 'items',
 	components: {

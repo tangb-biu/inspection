@@ -27,6 +27,11 @@ export default new Router({
       component: r => require.ensure([], r(require('@/page/performance.vue')))
     },
     {
+      path: '/performance/parse',
+      name: 'parse',
+      component: r => require.ensure([], r(require('@/page/parse.vue')))
+    },
+    {
       path: '/config/targets',
       name: 'configTargets',
       component: r => require.ensure([], r(require('@/page/config/targets.vue')))

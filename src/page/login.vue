@@ -56,7 +56,7 @@ export default {
 			let { username, password } = this;
 			if(e.type === 'click' || e.keyCode === 13) {
 				//login(handleSuccess.bind(this), handleFail.bind(this));
-				this.userLogin({username, password}).then(() => {
+				this.userLogin({username, password, that: this}).then(() => {
 					this.$router.push({ path: '/inspection' });
 				}).catch((data) => {
 					this.msg = data['msg'];
